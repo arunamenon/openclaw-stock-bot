@@ -1,0 +1,114 @@
+data_sources:
+  symbol_directory_urls:
+    - "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt"
+    - "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt"
+
+runtime:
+  request_timeout_seconds: 20
+
+stock_universe:
+  exclude_etf_flag: "Y"
+  exclude_name_keywords:
+    - "Warrant"
+    - "Right"
+    - "Unit"
+    - "Preferred"
+    - "Depositary"
+    - "Note"
+    - "ETF"
+    - "ETN"
+
+stock_screen:
+  max_symbols_to_scan: 5
+  top_stocks_to_show: 5
+  option_scan_top_stocks: 10
+
+  history_period: "6mo"
+  history_interval: "1d"
+
+  min_price: 10
+  min_avg_volume: 500000
+  min_dollar_volume_for_bonus: 100000000
+  max_volatility_for_bonus: 0.04
+
+  avg_volume_window: 30
+  ma_short_window: 20
+  ma_medium_window: 50
+  ma_long_window: 100
+  return_1m_window: 21
+  return_3m_window: 63
+  volatility_window: 21
+
+  score_weights:
+    price_above_short_ma: 2
+    price_above_medium_ma: 2
+    price_above_long_ma: 1
+    positive_1m_return: 2
+    positive_3m_return: 2
+    low_volatility: 1
+    high_dollar_volume: 1
+
+  sort_columns:
+    - "Score"
+    - "Dollar Volume"
+    - "3M Return %"
+  sort_ascending:
+    - false
+    - false
+    - false
+
+  round_price_digits: 2
+  round_percent_digits: 2
+  round_volatility_digits: 4
+
+options_screen:
+  underlying_history_period: "5d"
+
+  expiries_start_index: 1
+  expiries_end_index: 6
+  fallback_expiry_count: 1
+
+  call_label: "CALL"
+  put_label: "PUT"
+
+  min_bid: 0.01
+  min_ask: 0.01
+  min_mid_price: 0
+  min_volume: 0
+  min_open_interest: 100
+  max_spread_pct: 0.40
+  max_distance_pct: 0.25
+
+  missing_volume_fill: 0
+  missing_open_interest_fill: 0
+  mid_price_divisor: 2
+
+  score_weights:
+    volume_rank: 1
+    open_interest_rank: 1
+    spread_penalty: 1
+    distance_penalty: 1
+
+  sort_column: "Option Score"
+  sort_ascending: false
+
+  top_calls_to_show: 10
+  top_puts_to_show: 10
+
+output:
+  include_progress_logs: true
+  progress_log_every_n_symbols: 100
+  datetime_format: "%Y-%m-%d %H:%M"
+
+  title: "📊 Market Screening Report"
+  disclaimer: "Educational screening only — not financial advice."
+  universe_note: "Universe: dynamically pulled US listed stocks."
+  criteria_note: "Criteria: momentum, liquidity, trend strength, volatility, and option liquidity."
+
+  stocks_header: "📈 Top 10 Stock Candidates"
+  calls_header: "🟢 Top 10 Call Candidates"
+  puts_header: "🔴 Top 10 Put Candidates"
+
+  no_stocks_message: "No stock candidates found."
+  no_calls_message: "No call candidates found."
+  no_puts_message: "No put candidates found."
