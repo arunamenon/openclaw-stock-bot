@@ -6,3 +6,5 @@ lxml
 pyyaml
 flask
 websocket-client
+openai
+dotenv

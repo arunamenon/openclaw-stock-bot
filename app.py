@@ -47,7 +47,7 @@ def interpret_query(message):
 # 🔹 Step 2: OpenClaw (minor task only — formatting polish)
 def refine_with_openclaw(text: str) -> str:
     try:
-        OPENCLAW_TOKEN = os.getenv("OPENCLAW_GATEWAY_TOKEN")
+        OPENCLAW_TOKEN = os.getenv("OPENCLAW_TOKEN")
         ws = websocket.create_connection("ws://127.0.0.1:18789/", timeout=5, suppress_origin=True)
 
         def send_json(payload):

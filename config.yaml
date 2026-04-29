@@ -19,9 +19,9 @@ stock_universe:
     - "ETN"
 
 stock_screen:
-  max_symbols_to_scan: 5
-  top_stocks_to_show: 5
-  option_scan_top_stocks: 10
+  max_symbols_to_scan: 2
+  top_stocks_to_show: 2
+  option_scan_top_stocks: 2
 
   history_period: "6mo"
   history_interval: "1d"
